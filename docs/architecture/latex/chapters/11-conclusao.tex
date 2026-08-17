@@ -1,9 +1,0 @@
-\chapter{Conclusão}
-
-O estado atual do projeto demonstra uma base arquitetural consistente para a evolução do microserviço PlantDiseaseAI. A solução já possui API, camadas de aplicação, repositório temporário, storage local, mensageria com MassTransit e RabbitMQ, pipeline de IA placeholder e um conjunto de contratos e modelos preparados para receber o modelo treinado no futuro.
-
-Do ponto de vista estrutural, o sistema já apresenta separação clara entre entrada HTTP, orquestração de análise, persistência temporária, mensageria, pipeline e preparação para inferência. Essa organização reduz o esforço necessário para a próxima fase, na qual o placeholder será substituído por um modelo real carregado em memória e executado com tecnologia apropriada para o cenário escolhido.
-
-Como próximos passos, recomenda-se consolidar a etapa de preparação do modelo, definir o fluxo de treinamento em Python, escolher a estratégia definitiva de execução da inferência e, posteriormente, expandir os mecanismos de observabilidade, segurança e containerização. Com isso, o PlantDiseaseAI poderá evoluir de forma controlada até se tornar uma solução acadêmica e técnica completa.
-
-Esta documentação deve servir como base oficial para decisões futuras e como referência para a elaboração do TCC, garantindo coerência entre a implementação e a justificativa arquitetural.
