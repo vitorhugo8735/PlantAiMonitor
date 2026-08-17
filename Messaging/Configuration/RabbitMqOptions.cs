@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace PlantDiseaseAI.Api.Infrastructure.Queue;
+namespace PlantDiseaseAI.Api.Messaging.Configuration;
 
 /// <summary>
-/// Represents RabbitMQ configuration settings.
+/// Represents RabbitMQ configuration used by MassTransit.
 /// </summary>
 public sealed class RabbitMqOptions
 {
@@ -38,14 +38,8 @@ public sealed class RabbitMqOptions
     public string VirtualHost { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the RabbitMQ exchange name.
-    /// </summary>
-    [Required]
-    public string Exchange { get; set; } = string.Empty;
-
-    /// <summary>
     /// Gets or sets the default queue name.
     /// </summary>
     [Required]
-    public string Queue { get; set; } = string.Empty;
+    public string QueueName { get; set; } = string.Empty;
 }

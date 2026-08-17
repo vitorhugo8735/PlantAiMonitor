@@ -1,0 +1,30 @@
+\chapter{Inteligência Artificial}
+
+A camada de inteligência artificial representa o núcleo técnico futuro do microserviço. Embora ainda não exista inferência real na implementação atual, a arquitetura já está preparada para acomodar treinamento, exportação e execução de modelos sem reestruturar a aplicação. Essa preparação é importante porque o componente de IA tende a evoluir em ciclo próprio, possivelmente com tecnologias distintas das usadas na API principal.
+
+\section{Treinamento}
+
+O treinamento supervisionado será realizado em um ambiente separado, provavelmente em Python, com uso de bibliotecas consolidadas para manipulação de tensores, treinamento em GPU e avaliação de desempenho. O objetivo é produzir um modelo capaz de identificar doenças a partir de imagens de plantas com base em um dataset previamente rotulado. O artefato final poderá ser versionado e distribuído para consumo pelo microserviço.
+
+\section{Inferência}
+
+A inferência consiste em aplicar o modelo treinado a uma nova imagem e retornar uma classe ou distribuição de probabilidades. Na arquitetura atual, o \textit{ModelRunner} é o ponto de integração para essa etapa. Ele permanecerá isolado das decisões de pré-processamento e pós-processamento, garantindo a responsabilidade única de executar o modelo carregado.
+
+\section{TorchSharp, PyTorch e ONNX}
+
+A solução está preparada para suportar execução com \textit{TorchSharp} ou outro mecanismo compatível com .NET, embora a estratégia final ainda dependa de critérios de desempenho e operacionalização. Em paralelo, PyTorch permanece como candidato natural para o treinamento, enquanto ONNX pode ser utilizado futuramente como formato intermediário de exportação e interoperabilidade. Nenhuma dessas rotas é implementada nesta etapa, mas a documentação registra sua relevância arquitetural \cite{pytorchdocs,torchsharpdocs}.
+
+\section{CPU e GPU}
+
+A inferência poderá ser executada em CPU ou GPU, dependendo do ambiente de implantação e do custo-benefício desejado. O carregador de modelo e os parâmetros configuráveis em \textit{ModelOptions} foram preparados para acomodar essa escolha. Em cenários de produção, a decisão entre CPU e GPU impacta latência, custo e disponibilidade.
+
+\section{Modelo carregado em memória}
+
+O uso de \textit{ModelLoader} permite manter o modelo carregado em memória, evitando recarga repetida em cada requisição. Essa decisão reduz overhead e melhora previsibilidade de desempenho. O model loader foi desenhado como singleton para refletir essa necessidade arquitetural.
+
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{0.85\textwidth}{\centering Espaço reservado para o fluxograma de inferência e treinamento.}}
+    \caption{Arquitetura da camada de IA}
+    \label{fig:ia-arquitetura}
+\end{figure}

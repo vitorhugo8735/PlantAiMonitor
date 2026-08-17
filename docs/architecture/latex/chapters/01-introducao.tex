@@ -1,0 +1,34 @@
+\chapter{Introdução}
+
+O microserviço \textit{PlantDiseaseAI} tem como finalidade central executar a análise inteligente de imagens de plantas com foco na identificação de doenças vegetais, integrando uma arquitetura orientada a serviços com mensageria assíncrona e uma futura camada de inteligência artificial baseada em modelo treinado. A solução foi concebida para operar como um componente especializado, desacoplado de sistemas de cadastro, monitoramento ambiental, irrigação, sensores IoT, autenticação de usuários e interfaces gráficas, concentrando-se exclusivamente no ciclo de recebimento, acompanhamento e conclusão de análises de imagens.
+
+O problema que motiva este projeto está associado à necessidade de automatizar parte do diagnóstico fitossanitário, reduzindo o tempo entre a coleta da imagem e a obtenção de uma previsão técnica de doença. Em cenários agrícolas, decisões tardias podem impactar produtividade, consumo de insumos e capacidade de contenção de infecções. A proposta arquitetural é permitir que um backend externo envie solicitações de análise, acompanhe o progresso e receba o resultado final por callback, mantendo o processamento pesado fora do caminho síncrono da requisição.
+
+A motivação técnica para a adoção de uma arquitetura modular está relacionada a três objetivos principais: isolamento de responsabilidades, evolução independente de partes do sistema e preparação para integração com o modelo de IA sem necessidade de reestruturação posterior. A solução atual já contempla persistência temporária em memória, armazenamento local de imagens, mensageria assíncrona com MassTransit e um pipeline de IA placeholder, o que permite validar a composição arquitetural antes da introdução do modelo real.
+
+O escopo desta documentação é descrever a estrutura técnica do microserviço, as camadas adotadas, os contratos de domínio, o pipeline de processamento, a estratégia de mensageria, as decisões arquiteturais e o roadmap de evolução. Não fazem parte deste escopo a implementação do modelo treinado, o treinamento supervisionado, a publicação em cloud, a autenticação de consumidores externos ou a modelagem de banco de dados relacional.
+
+A arquitetura escolhida adota princípios de \textit{Clean Architecture} \cite{martin2008clean}, preservando a independência da camada central em relação a detalhes de infraestrutura e tecnologia. Essa escolha favorece testabilidade, substituição de componentes e evolução gradual do sistema. Em vez de acoplar a aplicação a um mecanismo único de persistência, mensageria ou inferência, o microserviço utiliza interfaces e serviços especializados para manter o domínio protegido contra mudanças externas.
+
+\section{Objetivos da documentação}
+
+Esta documentação tem como objetivo registrar o estado arquitetural atual do projeto de forma técnica e detalhada, permitindo que a solução seja utilizada como base de referência durante o desenvolvimento acadêmico e posteriormente em um Trabalho de Conclusão de Curso. Também busca facilitar decisões futuras de engenharia ao explicitar por que determinadas tecnologias e padrões foram escolhidos.
+
+\section{Escopo funcional do microserviço}
+
+O microserviço executa as seguintes responsabilidades principais:
+\begin{itemize}
+    \item receber solicitações de análise de imagens de plantas;
+    \item armazenar imagens em referência local;
+    \item persistir a solicitação em memória durante a fase de prototipação;
+    \item publicar mensagens assíncronas para o processamento posterior;
+    \item consumir mensagens de solicitação;
+    \item orquestrar pipeline de IA placeholder;
+    \item preparar a resposta final e encaminhá-la ao sistema solicitante.
+\end{itemize}
+
+\section{Estratégia arquitetural}
+
+A base arquitetural foi organizada em camadas para suportar crescimento futuro com baixo acoplamento. O microserviço separa os contratos de entrada e saída, os modelos centrais do domínio, as interfaces da aplicação, a infraestrutura de persistência, armazenamento, mensageria e os componentes do pipeline de IA. Essa separação reduz riscos de impacto lateral quando um componente for substituído por uma implementação real.
+
+A partir desse ponto, os capítulos seguintes detalham a visão geral, os módulos internos, o domínio, a mensageria, o pipeline, as decisões técnicas e o roadmap de evolução.

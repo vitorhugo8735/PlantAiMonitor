@@ -1,0 +1,140 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\geometry{left=3cm,right=2cm,top=3cm,bottom=2.5cm}
+\onehalfspacing
+\graphicspath{{figures/}}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue,
+    pdftitle={PlantDiseaseAI - Documentação Arquitetural},
+    pdfauthor={PlantDiseaseAI}
+}
+
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeborder}{RGB}{220,220,220}
+\definecolor{keywordblue}{RGB}{0,92,168}
+\definecolor{stringgreen}{RGB}{0,128,0}
+\definecolor{commentgray}{RGB}{120,120,120}
+
+\lstdefinelanguage{CSharp}{
+    morekeywords={abstract,as,base,bool,break,byte,case,catch,char,checked,class,const,continue,decimal,default,delegate,do,double,else,enum,event,explicit,extern,false,finally,fixed,float,for,foreach,goto,if,implicit,in,int,interface,internal,is,lock,long,namespace,new,null,object,operator,out,override,params,private,protected,public,readonly,ref,return,sbyte,sealed,short,sizeof,stackalloc,static,string,struct,switch,this,throw,true,try,typeof,uint,ulong,unchecked,unsafe,ushort,using,virtual,void,volatile,while,async,await,var,get,set,init,record},
+    sensitive=true,
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morestring=[b]",
+}
+
+\lstdefinestyle{csharpstyle}{
+    language=CSharp,
+    basicstyle=\ttfamily\small,
+    backgroundcolor=\color{codebg},
+    frame=single,
+    rulecolor=\color{codeborder},
+    keywordstyle=\color{keywordblue}\bfseries,
+    stringstyle=\color{stringgreen},
+    commentstyle=\color{commentgray}\itshape,
+    showstringspaces=false,
+    tabsize=4,
+    breaklines=true,
+    captionpos=b
+}
+
+\lstdefinestyle{pythonstyle}{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    backgroundcolor=\color{codebg},
+    frame=single,
+    rulecolor=\color{codeborder},
+    keywordstyle=\color{keywordblue}\bfseries,
+    stringstyle=\color{stringgreen},
+    commentstyle=\color{commentgray}\itshape,
+    showstringspaces=false,
+    tabsize=4,
+    breaklines=true,
+    captionpos=b
+}
+
+\lstdefinelanguage{pseudocode}{
+    morekeywords={procedure,function,if,then,else,for,while,return,begin,end,do,repeat,until,foreach,not,and,or,true,false},
+    sensitive=false,
+    morecomment=[l]{//},
+    morestring=[b]"
+}
+
+\lstdefinestyle{pseudocodestyle}{
+    language=pseudocode,
+    basicstyle=\ttfamily\small,
+    backgroundcolor=\color{codebg},
+    frame=single,
+    rulecolor=\color{codeborder},
+    keywordstyle=\color{keywordblue}\bfseries,
+    commentstyle=\color{commentgray}\itshape,
+    showstringspaces=false,
+    tabsize=4,
+    breaklines=true,
+    captionpos=b
+}
+
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0.15cm}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    {\Large Universidade / Instituição}\par
+    \vspace{2cm}
+    {\LARGE\bfseries PlantDiseaseAI\par}
+    \vspace{0.8cm}
+    {\Large Microserviço para Análise Inteligente de Imagens de Plantas\par}
+    \vspace{2cm}
+    {\large Documentação Arquitetural em \LaTeX\par}
+    \vfill
+    {\large \today\par}
+\end{titlepage}
+
+\pagenumbering{roman}
+\tableofcontents
+\listoffigures
+\listoftables
+\clearpage
+\pagenumbering{arabic}
+
+\include{chapters/01-introducao}
+\include{chapters/02-visao-geral}
+\include{chapters/03-arquitetura}
+\include{chapters/04-modelo-dominio}
+\include{chapters/05-pipeline}
+\include{chapters/06-mensageria}
+\include{chapters/07-inteligencia-artificial}
+\include{chapters/08-dataset}
+\include{chapters/09-roadmap}
+\include{chapters/10-decisoes-arquiteturais}
+\include{chapters/11-conclusao}
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

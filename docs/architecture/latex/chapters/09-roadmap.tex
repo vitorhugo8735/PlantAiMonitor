@@ -1,0 +1,24 @@
+\chapter{Roadmap}
+
+A evolução do projeto foi organizada em um roadmap que permite visualizar o estado atual e os próximos passos de forma objetiva. A tabela a seguir resume as áreas de evolução e seu status de implementação no momento desta documentação.
+
+\begin{table}[H]
+    \centering
+    \caption{Roadmap arquitetural e técnico do PlantDiseaseAI}
+    \label{tab:roadmap}
+    \begin{tabular}{p{4cm}p{4cm}p{5cm}}
+        \toprule
+        \textbf{Área} & \textbf{Status} & \textbf{Observações} \\
+        \midrule
+        Infraestrutura & Parcialmente concluída & API, Storage local, Repository em memória e mensageria configurada \\
+        IA & Em preparação & Pipeline placeholder, ModelLoader e contratos prontos \\
+        Banco & Não implementado & Persistência temporária em memória \\
+        Docker & Não iniciado & Aguardando consolidação da infraestrutura \\
+        Kubernetes & Não iniciado & Dependente da estratégia de containerização \\
+        Observabilidade & Parcialmente planejada & Logs estruturados podem ser expandidos \\
+        Autenticação & Não implementada & Fora do escopo atual \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+O roadmap indica que a base estrutural já suporta a introdução do modelo treinado sem alterações profundas. As próximas fases deverão focar na substituição dos placeholders por componentes produtivos, na preparação da execução em container e na definição de observabilidade e segurança conforme a necessidade de implantação.

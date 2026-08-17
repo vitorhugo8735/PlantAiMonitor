@@ -50,9 +50,13 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "RabbitMQ.Client": {
+            "MassTransit": {
               "target": "Package",
-              "version": "[6.8.1, )"
+              "version": "[8.2.3, )"
+            },
+            "MassTransit.RabbitMQ": {
+              "target": "Package",
+              "version": "[8.2.3, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -73,19 +77,19 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.29, 8.0.29]"
+              "version": "[8.0.30, 8.0.30]"
             },
             {
               "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[8.0.29, 8.0.29]"
+              "version": "[8.0.30, 8.0.30]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.29, 8.0.29]"
+              "version": "[8.0.30, 8.0.30]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[8.0.29, 8.0.29]"
+              "version": "[8.0.30, 8.0.30]"
             }
           ],
           "frameworkReferences": {
@@ -96,7 +100,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.316/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.317/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PlantDiseaseAI.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+769638ce46ec5ba8ab1ad9bf0076aa03f9a5e18e")]
 [assembly: System.Reflection.AssemblyProductAttribute("PlantDiseaseAI.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PlantDiseaseAI.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

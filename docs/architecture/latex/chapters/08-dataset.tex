@@ -1,0 +1,41 @@
+\chapter{Dataset}
+
+A qualidade de um sistema de classificação de imagens depende diretamente do dataset utilizado no treinamento. No contexto deste projeto, a base de dados será obtida a partir de um dataset público, com destaque para repositórios acadêmicos e fontes amplamente utilizadas em pesquisa, como Kaggle e PlantVillage \cite{kaggle,plantvillage}. A escolha por um dataset conhecido facilita comparabilidade, reprodutibilidade e validação dos resultados.
+
+\section{Origem e composição}
+
+O dataset costuma ser organizado em classes representando diferentes doenças, além da classe saudável. Em muitos cenários, cada diretório corresponde a uma categoria, o que simplifica o carregamento supervisionado. A documentação do projeto prevê a divisão em conjuntos de treino, validação e teste, conforme prática padrão em aprendizado supervisionado.
+
+\section{Estrutura das pastas}
+
+A estrutura esperada para o treinamento geralmente segue o padrão:
+\begin{itemize}
+    \item \textit{train}: imagens usadas no ajuste dos pesos do modelo;
+    \item \textit{validation}: imagens usadas para acompanhamento do desempenho durante o treinamento;
+    \item \textit{test}: imagens mantidas para avaliação final.
+\end{itemize}
+
+Essa separação evita vazamento de informação e permite estimar de forma mais confiável a capacidade de generalização do modelo.
+
+\section{Volume aproximado}
+
+A quantidade de imagens pode variar de acordo com a classe e o dataset escolhido. Em projetos de classificação foliar, é comum trabalhar com milhares ou dezenas de milhares de imagens distribuídas entre várias classes. A dimensão exata do dataset final deve ser documentada quando a etapa de treinamento for executada.
+
+\section{Treinamento supervisionado}
+
+O treinamento supervisionado depende de rótulos consistentes e de uma política clara de balanceamento de classes. Em aplicações agrícolas, a variabilidade de iluminação, fundo, perspectiva e estágio de desenvolvimento da folha pode exigir técnicas adicionais de \textit{data augmentation}. A futura etapa de treinamento deverá registrar essas escolhas para manter a reprodutibilidade científica.
+
+\begin{table}[H]
+    \centering
+    \caption{Estrutura esperada do dataset}
+    \label{tab:dataset-estrutura}
+    \begin{tabular}{p{3cm}p{9cm}}
+        \toprule
+        \textbf{Conjunto} & \textbf{Finalidade} \\
+        \midrule
+        Train & Ajuste dos parâmetros do modelo \\
+        Validation & Monitoramento de generalização durante o treinamento \\
+        Test & Avaliação final independente \\
+        \bottomrule
+    \end{tabular}
+\end{table}

@@ -1,0 +1,37 @@
+\chapter{Arquitetura}
+
+A arquitetura do microserviço foi concebida segundo os princípios de \textit{Clean Architecture} \cite{martin2008clean}, com foco em independência tecnológica, separação de responsabilidades e testabilidade. O núcleo da solução é formado pelos modelos e contratos centrais, enquanto a borda externa contém detalhes de infraestrutura, tais como armazenamento local, mensageria, repositório temporário e integração com a API HTTP.
+
+A decisão de manter as dependências apontando para dentro é um dos pilares desta organização. Camadas externas dependem de abstrações definidas pela aplicação ou pelo domínio, e não o contrário. Isso garante que mudanças em RabbitMQ, no mecanismo de armazenamento ou no modelo de inferência não obriguem a reescrita do domínio ou dos contratos centrais.
+
+\section{Camadas}
+
+A solução está organizada em camadas lógicas:
+\begin{itemize}
+    \item \textbf{Controllers}: expõem endpoints HTTP e não contêm regra de negócio;
+    \item \textbf{Application}: concentra serviços, processadores e interfaces;
+    \item \textbf{Domain / Models}: contém as estruturas centrais do domínio;
+    \item \textbf{Infrastructure}: implementa persistência, storage e mensageria;
+    \item \textbf{Messaging}: configura MassTransit e integra o consumo assíncrono;
+    \item \textbf{AI}: prepara o pipeline de inferência e o carregamento do modelo;
+    \item \textbf{Common}: reúne exceções e utilidades transversais.
+\end{itemize}
+
+\section{Dependências}
+
+A estrutura foi desenhada para que as dependências sejam unidirecionais. Os Controllers dependem de interfaces da Application; a Application depende de abstrações do domínio e de contratos de infraestrutura; Infrastructure depende de implementações concretas; AI expõe contratos reutilizáveis e implementações substituíveis. Esse arranjo reduz o risco de acoplamento circular e torna a composição da aplicação mais previsível.
+
+\section{Injeção de dependência}
+
+A composição é realizada no ponto de entrada da aplicação por meio do container de \textit{dependency injection} do ASP.NET Core \cite{aspnetdocs}. Cada componente é registrado com lifetime compatível com sua função. Serviços de orquestração e pipeline são \textit{scoped}, o repositório temporário é \textit{singleton} e o carregador de modelo também é \textit{singleton}, uma vez que o modelo futuro deverá ser carregado uma única vez e mantido em memória.
+
+\section{Componentes estruturais}
+
+Repository, Storage, Services, Messaging, Pipeline e AI são tratados como subsistemas independentes. O repository não decide regras de negócio; o storage apenas salva e recupera imagens; o messaging entrega comunicação assíncrona; o pipeline encapsula a sequência de etapas de inferência; e o carregador de modelo existe para isolar a responsabilidade de manter o modelo em memória.
+
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{0.85\textwidth}{\centering Espaço reservado para o diagrama de componentes da solução.}}
+    \caption{Diagrama de componentes da arquitetura}
+    \label{fig:componentes-arquitetura}
+\end{figure}

@@ -1,4 +1,5 @@
 using PlantDiseaseAI.Api.Application.Interfaces;
+using PlantDiseaseAI.Api.Common.Exceptions;
 
 namespace PlantDiseaseAI.Api.Infrastructure.Storage;
 
@@ -36,7 +37,7 @@ public sealed class LocalStorageService : IStorageService
 
         if (!File.Exists(filePath))
         {
-            throw new FileNotFoundException("Image not found.", filePath);
+            throw new InvalidImageException($"Image not found: {imageReference}");
         }
 
         return Task.FromResult<Stream>(File.OpenRead(filePath));

@@ -33,3 +33,6 @@ C:\Programação\C#\AI_Service_planta\PlantAiMonitor\PlantAiMonitor\obj\Debug\ne
 C:\Programação\C#\AI_Service_planta\PlantAiMonitor\PlantAiMonitor\obj\Debug\net8.0\PlantDiseaseAI.Api.pdb
 C:\Programação\C#\AI_Service_planta\PlantAiMonitor\PlantAiMonitor\obj\Debug\net8.0\ref\PlantDiseaseAI.Api.dll
 C:\Programação\C#\AI_Service_planta\PlantAiMonitor\PlantAiMonitor\bin\Debug\net8.0\RabbitMQ.Client.dll
+C:\Programação\C#\AI_Service_planta\PlantAiMonitor\PlantAiMonitor\bin\Debug\net8.0\MassTransit.dll
+C:\Programação\C#\AI_Service_planta\PlantAiMonitor\PlantAiMonitor\bin\Debug\net8.0\MassTransit.Abstractions.dll
+C:\Programação\C#\AI_Service_planta\PlantAiMonitor\PlantAiMonitor\bin\Debug\net8.0\MassTransit.RabbitMqTransport.dll

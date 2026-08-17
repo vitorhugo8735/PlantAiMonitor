@@ -6,6 +6,11 @@ namespace PlantDiseaseAI.Api.Models;
 public sealed class DiseasePrediction
 {
     /// <summary>
+    /// Gets or sets the disease identifier.
+    /// </summary>
+    public int DiseaseId { get; set; }
+
+    /// <summary>
     /// Gets or sets the predicted disease name.
     /// </summary>
     public string Disease { get; set; } = string.Empty;
@@ -14,4 +19,9 @@ public sealed class DiseasePrediction
     /// Gets or sets the confidence score for the prediction.
     /// </summary>
     public float Confidence { get; set; }
+
+    /// <summary>
+    /// Gets or sets the probability score for the prediction.
+    /// </summary>
+    public float Probability { get; set; }
 }

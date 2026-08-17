@@ -1,5 +1,6 @@
 
 using PlantDiseaseAI.Api.Extensions;
+using PlantDiseaseAI.Api.Messaging.Extensions;
 
 namespace PlantDiseaseAI.Api;
 
@@ -12,7 +13,8 @@ public class Program
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
-        builder.Services.AddApplicationServices();
+        builder.Services.AddApplicationServices(builder.Configuration);
+        builder.Services.AddMessagingInfrastructure(builder.Configuration);
 
         var app = builder.Build();
 

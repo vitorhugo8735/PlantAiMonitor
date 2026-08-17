@@ -1,4 +1,5 @@
-using PlantDiseaseAI.Api.Contracts.Messages;
+using PlantDiseaseAI.Api.Contracts.Commands;
+using PlantDiseaseAI.Api.Contracts.Events;
 
 namespace PlantDiseaseAI.Api.Application.Interfaces;
 
@@ -13,7 +14,7 @@ public interface IMessagePublisher
     /// <param name="message">The message to publish.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     Task PublishAnalysisRequestedAsync(
-        AnalysisRequestedMessage message,
+        AnalysisRequestedCommand message,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -22,7 +23,7 @@ public interface IMessagePublisher
     /// <param name="message">The message to publish.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     Task PublishAnalysisCompletedAsync(
-        AnalysisCompletedMessage message,
+        AnalysisCompletedEvent message,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -31,6 +32,6 @@ public interface IMessagePublisher
     /// <param name="message">The message to publish.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     Task PublishAnalysisFailedAsync(
-        AnalysisFailedMessage message,
+        AnalysisFailedEvent message,
         CancellationToken cancellationToken = default);
 }
