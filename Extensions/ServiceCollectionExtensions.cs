@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;
 using PlantDiseaseAI.Api.AI.Configuration;
 using PlantDiseaseAI.Api.AI.Inference;
 using PlantDiseaseAI.Api.AI.Interfaces;
@@ -11,6 +12,7 @@ using PlantDiseaseAI.Api.Application.Interfaces;
 using PlantDiseaseAI.Api.Application.Services;
 using PlantDiseaseAI.Api.Infrastructure.Repositories;
 using PlantDiseaseAI.Api.Infrastructure.Storage;
+using PlantDiseaseAI.Api.Infrastructure.Persistence;
 
 namespace PlantDiseaseAI.Api.Extensions;
 
@@ -23,6 +25,10 @@ public static class ServiceCollectionExtensions
         services.Configure<PythonInferenceOptions>(configuration.GetSection("PythonInference"));
         services.Configure<CallbackOptions>(configuration.GetSection("Callback"));
 
+        var connectionString = configuration.GetConnectionString("AnalysisDatabase")
+            ?? "Data Source=plant-ai-monitor.db";
+        services.AddDbContext<AnalysisDbContext>(options => options.UseSqlite(connectionString));
+
         services.AddHttpClient<ICallbackService, CallbackService>((serviceProvider, client) =>
         {
             var options = serviceProvider.GetRequiredService<IOptions<CallbackOptions>>().Value;
@@ -31,7 +37,7 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<IAnalysisService, AnalysisService>();
         services.AddScoped<IAnalysisProcessor, AnalysisProcessor>();
-        services.AddSingleton<IAnalysisRepository, InMemoryAnalysisRepository>();
+        services.AddScoped<IAnalysisRepository, SqliteAnalysisRepository>();
         services.AddScoped<IMessagePublisher, PlantDiseaseAI.Api.Messaging.Publishers.MessagePublisher>();
         services.AddSingleton<IModelLoader, ModelLoader>();
         services.AddScoped<IStorageService, LocalStorageService>();

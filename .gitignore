@@ -1,0 +1,21 @@
+# .NET build output
+docs/
+bin/
+obj/
+
+# Local runtime data
+Uploads/
+*.db
+*.db-shm
+*.db-wal
+
+# Visual Studio and user-specific files
+.vs/
+*.user
+*.suo
+
+# IDE and OS files
+.idea/
+.vscode/
+*.userprefs
+*.DS_Store

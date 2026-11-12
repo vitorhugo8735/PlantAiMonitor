@@ -38,12 +38,15 @@ public sealed class PredictionPostProcessor : IPredictionPostProcessor
             })
             .ToList();
 
+        var isHealthy = prediction.PredictedClass.Contains("healthy", StringComparison.OrdinalIgnoreCase);
+
         return Task.FromResult(new PredictionResult
         {
             ImageReference = imageReference,
             PredictedClassId = prediction.PredictedClassId,
             PredictedClass = prediction.PredictedClass,
             Disease = prediction.PredictedClass,
+            IsHealthy = isHealthy,
             Confidence = (float)prediction.Confidence,
             Probabilities = probabilities,
             Description = $"Predicted class: {prediction.PredictedClass}",

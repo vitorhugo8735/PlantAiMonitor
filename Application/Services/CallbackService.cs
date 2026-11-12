@@ -50,6 +50,7 @@ public sealed class CallbackService : ICallbackService
                 status = AnalysisStatus.Completed.ToString(),
                 predictedClassId = result.PredictedClassId,
                 predictedClass = result.PredictedClass,
+                isHealthy = result.IsHealthy,
                 confidence = result.Confidence,
                 probabilities = result.Probabilities,
                 imageReference = result.ImageReference

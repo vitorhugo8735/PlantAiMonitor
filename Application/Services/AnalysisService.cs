@@ -131,17 +131,20 @@ public sealed class AnalysisService : IAnalysisService
         {
             AnalysisId = analysisJob.Id,
             Status = analysisJob.Status.ToString(),
-            ImageReference = analysisJob.ImageReference,
-            CreatedAt = analysisJob.CreatedAt,
-            StartedAt = analysisJob.StartedAt,
-            FinishedAt = analysisJob.FinishedAt,
-            PredictedClassId = analysisJob.Result?.PredictedClassId,
             PredictedClass = analysisJob.Result?.PredictedClass,
             Disease = analysisJob.Result?.Disease,
+            IsHealthy = analysisJob.Result?.IsHealthy,
             Confidence = analysisJob.Result?.Confidence,
             Description = analysisJob.Result?.Description,
             Probabilities = analysisJob.Result?.Probabilities,
             Predictions = analysisJob.Result?.Predictions
+                .Select(prediction => new AnalysisPredictionResponse
+                {
+                    Name = prediction.Disease,
+                    Confidence = prediction.Confidence,
+                    Description = analysisJob.Result.Description
+                })
+                .ToList()
         };
     }
 

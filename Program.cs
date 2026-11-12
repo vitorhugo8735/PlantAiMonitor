@@ -1,6 +1,7 @@
 
 using PlantDiseaseAI.Api.Extensions;
 using PlantDiseaseAI.Api.Messaging.Extensions;
+using PlantDiseaseAI.Api.Infrastructure.Persistence;
 
 namespace PlantDiseaseAI.Api;
 
@@ -26,6 +27,12 @@ public class Program
 
         app.UseHttpsRedirection();
         app.MapControllers();
+
+        using (var scope = app.Services.CreateScope())
+        {
+            var database = scope.ServiceProvider.GetRequiredService<AnalysisDbContext>();
+            database.Database.EnsureCreated();
+        }
 
         app.Run();
     }

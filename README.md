@@ -12,7 +12,7 @@ O projeto é um serviço de processamento assíncrono de imagens para classifica
 - publicar a requisição em RabbitMQ usando MassTransit;
 - processar a análise em segundo plano;
 - executar a inferência por meio de um processo Python;
-- persistir o resultado em memória;
+- persistir o resultado em SQLite;
 - atualizar o status da análise;
 - enviar o resultado ou o erro para o `CallbackUrl` informado.
 
@@ -30,7 +30,7 @@ flowchart TD
     F --> G[PythonInferenceService]
     G --> H[Python process / model inference]
     H --> I[Resultado da inferência]
-    I --> J[Persistência em memória]
+    I --> J[Persistência em SQLite]
     J --> K[Update de status]
     K --> L[CallbackService]
     L --> M[CallbackUrl]
@@ -124,7 +124,7 @@ O fluxo real implementado no projeto é o seguinte:
 8. O `AnalysisProcessor` atualiza o status para `Processing`.
 9. A análise executa a pipeline em `AnalysisPipeline`, que chama a inferência por meio de `PythonInferenceService`.
 10. O processo Python recebe a imagem e retorna um payload JSON.
-11. O resultado é convertido para `PredictionResult` e persistido no repositório em memória.
+11. O resultado é convertido para `PredictionResult` e persistido no banco SQLite local.
 12. O status da análise é atualizado para `Completed`.
 13. O `CallbackService` envia um POST para o `CallbackUrl` com o resultado da análise ou com o erro, conforme o caso.
 
@@ -360,6 +360,18 @@ O callback de sucesso envia um JSON com:
 
 O arquivo principal de configuração é `appsettings.json`.
 
+### SQLite
+
+As análises são persistidas localmente no arquivo `plant-ai-monitor.db`, configurado
+pela chave `ConnectionStrings:AnalysisDatabase`. O banco é criado automaticamente
+na inicialização da aplicação.
+
+```json
+"ConnectionStrings": {
+  "AnalysisDatabase": "Data Source=plant-ai-monitor.db"
+}
+```
+
 ### RabbitMQ
 
 ```json
@@ -483,13 +495,13 @@ O backend possui as partes principais implementadas e funcionando no código atu
 - fila assíncrona com RabbitMQ e MassTransit;
 - integração com processo Python para inferência de imagens;
 - armazenamento local de imagens em `Uploads`;
-- persistência em memória da análise;
+- persistência local em SQLite da análise;
 - callback HTTP para sucesso e falha;
 - testes automatizados cobrindo inferência e callback.
 
 ## Observações
 
-- O projeto usa repositório em memória (`InMemoryAnalysisRepository`), então os dados não são persistidos entre reinicializações do processo.
+- O projeto usa SQLite (`SqliteAnalysisRepository`), então os dados das análises permanecem disponíveis entre reinicializações do processo.
 - O callback é uma notificação complementar; a análise pode continuar concluída mesmo quando o callback falha.
 - O backend depende de um broker RabbitMQ acessível em `localhost:5672` para o processamento assíncrono funcionar corretamente.
 - O módulo Python é parte do fluxo de inferência, mas não é exposto como uma API separada para o cliente.

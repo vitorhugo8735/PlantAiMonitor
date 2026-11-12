@@ -25,6 +25,8 @@ public sealed class PredictionResult
     /// </summary>
     public string Disease { get; set; } = string.Empty;
 
+    public bool IsHealthy { get; set; }
+
     /// <summary>
     /// Gets or sets the confidence score of the prediction.
     /// </summary>
